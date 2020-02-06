@@ -1,187 +1,141 @@
-<!DOCTYPE html>
-<html>
+var dmt = "%&%";
+function enviar() {
 
-<head>
-    <script src="scripts.js"></script>
+    var nome = document.getElementById("nome");
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-</head>
-
-<style>
-    div {
-        text-align: center;
-        font-size: large;
+    if (nome.value != "") {
+        alert('Obrigado sr(a) ' + nome.value + ' os seus dados foram encaminhados com sucesso');
     }
 
-    input:invalid {
-        background-color: pink;
+};
+
+
+function editar() {
+    var x;
+    var r = confirm("TEM CERTEZA QUE DESEJA ALTERAR?");
+    if (r == true) {
+        x = "Cadastro Alterado!";
     }
-
-    input:focus:invalid {
-        box-shadow: 0 0 5px #ff0000;
-        border-color: #ff0000;
-        color: #ff0000
+    else {
+        x = "Cadastro não Alterado";
     }
+    document.getElementById("demo").innerHTML = x;
+};
 
-    text {
-        width: 200px;
-        margin: 8px;
-        border-style: unset;
-        border-radius: 5px;
-        box-sizing: content-box;
-        line-height: 2.0;
+
+function excluir() {
+    limpaBanco()
+    var x;
+    var r = confirm("TEM CERTEZA QUE DESEJA EXCLUIR?");
+    if (r == true) {
+        x = "Cadastro Excluído!";
     }
-
-    input:required {
-        background-color: whitesmoke;
+    else {
+        x = "Cadastro não excluído";
     }
+    document.getElementById("demo").innerHTML = x;
+}
 
-    button,
-    input {
-        font-size: 18px;
-        font-weight: normal;
-        padding: 5px 12px;
-        background: limegreen;
-        border: limegreen;
-        border-radius: 10px;
-    }
-</style>
+var dmt = "%&%"
 
-<body>
+function salvarBanco(matricula, nome, email, cargo, dataAd) {
 
-    <div class="a" style="margin: auto; width: 550px; background-color:cornflowerblue; border-radius: 10px;">
-        <h1>Cadastro de Participantes</h1>
+    matriculas = window.sessionStorage.getItem("mats");
+    flag = false;
 
-
-        <div>
-            <form style="width: 500px; margin:auto; background-color:cornflowerblue; border-radius: 10px; ">
-                <b>
-                    <p><label for="matricula">Matrícula</label>
-                        <input type="text" id="matricula" name="matricula" placeholder="Matricula" required /></p>
-                    <p>
-                        <p><label for="nome">Nome</label>
-                            <input type="text" id="nome" name="nome" placeholder="Nome" required /></p>
-                        <p>
-                            <label for="mail">Email</label>
-                            <input type="email" id="mail" name="mail" placeholder="ex: nome@hotmail.com" required />
-                        </p>
-                        <p>
-                            <label for="cargo">Cargo</label>
-                            <input type="text" id="cargo" name="cargo" placeholder="ex: Trainee" required />
-                        </p>
-                        <p>
-                            <label for="dataAd">Data de Admissão</label>
-                            <input type="date" id="dataAd" name="dataAd" required />
-                        </p>
-
-                        <input type="submit" onclick="cadastro();" value="Cadastro" />
-
-                        <button id="btA" onclick="editar()">Editar</button>
-
-                        <button id="btE" onclick="excluir()">Excluir</button>
-
-                        <button onclick="consultar()">Consultar</button>
-                        <button onclick="carregaTable()">Listar</button>
-
-
-                        <table id=tabela>
-                            <thread>
-                                <tr>
-                                    <th>Matricula</th>
-                                    <th>Nome</th>
-                                    <th>Email</th>
-                                    <th>Cargo</th>
-                                    <th>Data de Início</th>
-                                    <th>1º Avaliação</th>
-                                    <th>2º Avaliação</th>
-                                    <th>3º Avaliação</th>
-                                </tr>
-                            </thread>
-                        </table>
-
-
-            </form>
-        </div>
-</body>
-
-<script>
-
-    function cadastro() {
-
-        Matricula = document.querySelector("#matricula").value
-        Nome = document.querySelector("#nome").value
-        Email = document.querySelector("#mail").value
-        Cargo = document.querySelector("#cargo").value
-        DataAd = document.querySelector("#dataAd").value
-
-
-        salvarBanco(Matricula, Nome, Email, Cargo, DataAd)
-    }
-
-
-
-    function carregaTable() {
-
-        mats = todasMatriculas()
-        mats.forEach(mat => {
-            dados = carregarBanco(mat)
-            var tabela = document.querySelector("#tabela")
-            var linha = tabela.insertRow(-1)
-
-            var celula = linha.insertCell(0)
-            celula.innerHTML = mat
-            var celula1 = linha.insertCell(1)
-            celula1.innerHTML = dados[0]
-            var celula2 = linha.insertCell(2)
-            celula2.innerHTML = dados[1]
-            var celula3 = linha.insertCell(3)
-            celula3.innerHTML = dados[2]
-            var celula4 = linha.insertCell(4)
-            celula4.innerHTML = dados[3]
-
-
-            avaliacao1 = new Date(dados[3])
-            avaliacao2 = new Date(dados[3])
-            avaliacao3 = new Date(dados[3])
-
-            avaliacao1.setDate(avaliacao1.getDate() + 90)
-            avaliacao1 = avaliacao1.toISOString().split("T")[0];
-
-            avaliacao2.setDate(avaliacao2.getDate() + 180)
-            avaliacao2 = avaliacao2.toISOString().split("T")[0];
-
-            avaliacao3.setDate(avaliacao3.getDate() + 360)
-            avaliacao3 = avaliacao3.toISOString().split("T")[0];
-
-
-            var celula5 = linha.insertCell(5)
-            celula5.innerHTML = avaliacao1
-
-            var celula6 = linha.insertCell(6)
-            celula6.innerHTML = avaliacao2
-
-            var celula7 = linha.insertCell(7)
-            celula7.innerHTML = avaliacao3
+    //checa se matricula já está cadastrada
+    //se estiver, avisa e nao cadastra
+    if (matriculas != null) {
+        MatriculasArray = matriculas.split(dmt);
+        MatriculasArray.forEach(tmpMat => {
+            if (tmpMat == matricula) {
+                flag = true;
+            }
         });
-
     }
+    if (flag === true) {
+        alert("Matricula ja cadastrada")
 
-    function consultar() {
-        Matricula = document.querySelector("#matricula").value
+    } else {
 
-        dados = carregarBanco(Matricula)
-        if (dados === null) {
-            alert("Matricula não cadastrada")
+        //Cria um token com as infos do funcionario
+        Token = nome + dmt + email + dmt + cargo + dmt + dataAd
+
+        //Salva os valores no session Storage usando a sua matricula como chave
+        window.sessionStorage.setItem(matricula, Token);
+
+        //Pega a lista de todas as matriculas
+        matriculas = window.sessionStorage.getItem("mats");
+
+        //Checa se existe alguma matricula ja cadastrada
+        //Se não houver, crie utilizando a matricula atual
+        if (matriculas === null) {
+            window.sessionStorage.setItem("mats", matricula + dmt);
+            matriculas = window.sessionStorage.getItem("mats");
+
+            //Se a matricula já existe
         } else {
-
-            document.querySelector("#nome").value = dados[0]
-            document.querySelector("#mail").value = dados[1]
-            document.querySelector("#cargo").value = dados[2]
-            document.querySelector("#dataAd").value = dados[3]
+            matriculas = matriculas + matricula + dmt;
+            window.sessionStorage.setItem("mats", matriculas);
         }
-    }
-</script>
 
-</html>
+        alert("Cadastro realizado")
+    }
+
+}
+
+function carregarBanco(matricula) {
+    token = window.sessionStorage.getItem(matricula);
+
+    if (token === null) {
+        return null;
+    } else {
+        dados = token.split(dmt)
+        return dados;
+
+    }
+}
+
+function todasMatriculas() {
+
+    matriculas = window.sessionStorage.getItem("mats");
+    if (matriculas === null) {
+        return matriculas
+    }
+
+    return matriculas.split(dmt)
+}
+
+function limpaBanco() {
+    window.sessionStorage.clear()
+}
+
+function deletaBanco(matricula) {
+    token = window.sessionStorage.getItem(matricula);
+
+    if (token === null) {
+        return null;
+
+    } else {
+        matriculas = window.sessionStorage.getItem("mats");
+        matriculas = matriculas.split(dmt);
+
+        flag = false;
+        for (let i = 0; i < matriculas.length; i++) {
+            if (i === matriculas[i]) {
+                matriculas.splice(i, 1);
+                flag = true;
+                break;
+            }
+        }
+
+        tokenMatriculas = "";
+        for (let i = 0; i < matriculas.length; i++) {
+            tokenMatriculas = tokenMatriculas + matriculas[i] + dmt;
+        }
+
+        window.sessionStorage.setItem("mats", tokenMatriculas)
+        window.sessionStorage.removeItem(matricula)
+        return flag;
+    }
+}
