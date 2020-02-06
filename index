@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <script src="alerta.js"></script>
+    <script src="scripts.js"></script>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -82,7 +82,8 @@
 
                         <button id="btE" onclick="excluir()">Excluir</button>
 
-                        <button onclick="carregaTable()">Consultar</button>
+                        <button onclick="consultar()">Consultar</button>
+                        <button onclick="carregaTable()">Listar</button>
 
 
                         <table id=tabela>
@@ -124,7 +125,6 @@
     function carregaTable() {
 
         mats = todasMatriculas()
-        alert(mats)
         mats.forEach(mat => {
             dados = carregarBanco(mat)
             var tabela = document.querySelector("#tabela")
@@ -140,7 +140,7 @@
             celula3.innerHTML = dados[2]
             var celula4 = linha.insertCell(4)
             celula4.innerHTML = dados[3]
-            alert(dados[3])
+
 
             avaliacao1 = new Date(dados[3])
             avaliacao2 = new Date(dados[3])
@@ -156,7 +156,7 @@
             avaliacao3 = avaliacao3.toISOString().split("T")[0];
 
 
-            var celula5 = linha.insertCell(5)       
+            var celula5 = linha.insertCell(5)
             celula5.innerHTML = avaliacao1
 
             var celula6 = linha.insertCell(6)
@@ -168,6 +168,22 @@
 
     }
 
+    function consultar() {
+        Matricula = document.querySelector("#matricula").value
+
+        dados = carregarBanco(Matricula)
+        if (dados === null) {
+            alert("Matricula não cadastrada")
+        } else {
+
+            document.querySelector("#nome").value = dados[0]
+            document.querySelector("#mail").value = dados[1]
+            document.querySelector("#cargo").value = dados[2]
+            document.querySelector("#dataAd").value = dados[3]
+        }
+    }
 </script>
+
+
 
 </html>
