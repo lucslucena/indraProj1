@@ -12,7 +12,7 @@
 <style>
     div {
         text-align: center;
-        font-size: large;
+        font-size: medium;
     }
 
     input:invalid {
@@ -38,6 +38,19 @@
         background-color: whitesmoke;
     }
 
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+    }
+
     button,
     input {
         font-size: 18px;
@@ -45,6 +58,65 @@
         padding: 5px 12px;
         background: limegreen;
         border: limegreen;
+        border-radius: 10px;
+    }
+
+    h1,
+    th,
+    label,
+    input,
+    button {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-weight: 550;
+    }
+
+    #iptC {
+        font-size: 18px;
+        font-weight: normal;
+        padding: 5px 12px;
+        color: white;
+        background: limegreen;
+        border: limegreen;
+        border-radius: 10px;
+    }
+
+    #btE {
+        font-size: 18px;
+        font-weight: normal;
+        padding: 5px 12px;
+        color: white;
+        background: #ec0c0c;
+        border: #ec0c0c;
+        border-radius: 10px;
+    }
+
+    #btA {
+        font-size: 18px;
+        font-weight: normal;
+        padding: 5px 12px;
+        color: white;
+        background: rgb(233, 229, 18);
+        border: rgb(233, 229, 18);
+        border-radius: 10px;
+    }
+
+    #btC {
+        font-size: 18px;
+        font-weight: normal;
+        padding: 5px 12px;
+        color: rgb(245, 245, 245);
+        background: rgb(55, 58, 214);
+        border: rgb(55, 58, 214);
+        border-radius: 10px;
+    }
+
+    #btL {
+        font-size: 18px;
+        font-weight: normal;
+        padding: 5px 12px;
+        color: white;
+        background: rgb(115, 124, 118);
+        border: rgb(115, 124, 118);
         border-radius: 10px;
     }
 </style>
@@ -76,14 +148,14 @@
                             <input type="date" id="dataAd" name="dataAd" required />
                         </p>
 
-                        <input type="submit" onclick="cadastro();" value="Cadastro" />
+                        <input id="iptC" type="submit" onclick="cadastro();" value="Cadastrar" />
 
                         <button id="btA" onclick="editar()">Editar</button>
 
                         <button id="btE" onclick="excluir()">Excluir</button>
 
-                        <button onclick="consultar()">Consultar</button>
-                        <button onclick="carregaTable()">Listar</button>
+                        <button id="btC" onclick="consultar()">Consultar</button>
+                        <button id="btL" onclick="carregaTable()">Listar</button>
 
 
                         <table id=tabela>
@@ -183,7 +255,5 @@
         }
     }
 </script>
-
-
 
 </html>
