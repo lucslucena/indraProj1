@@ -10,7 +10,6 @@
 </head>
 
 <style>
-
     div {
         text-align: center;
         font-size: large;
@@ -26,7 +25,7 @@
         color: #ff0000
     }
 
-    text{
+    text {
         width: 200px;
         margin: 8px;
         border-style: unset;
@@ -39,7 +38,7 @@
         background-color: whitesmoke;
     }
 
-    button, input{
+    button,  input {
         font-size: 18px;
         font-weight: normal;
         padding: 5px 12px;
@@ -47,7 +46,6 @@
         border: limegreen;
         border-radius: 10px;
     }
-
 </style>
 
 <body>
@@ -59,8 +57,11 @@
         <div>
             <form style="width: 500px; margin:auto; background-color:cornflowerblue; border-radius: 10px; ">
                 <b>
+                    <p><label for="matricula">Matrícula</label>
+                        <input type="text" id="matricula" name="matricula" placeholder="Matricula" required /></p>
+                    <p>
                     <p><label for="nome">Nome</label>
-                        <input type="text" id="nome" name="nome" placeholder="Nome Completo" required /></p>
+                        <input type="text" id="nome" name="nome" placeholder="Nome" required /></p>
                     <p>
                         <label for="mail">Email</label>
                         <input type="email" id="mail" name="mail" placeholder="ex: nome@hotmail.com" required />
@@ -73,16 +74,32 @@
                         <label for="dataAd">Data de Admissão</label>
                         <input type="date" id="dataAd" name="dataAd" required />
                     </p>
-                    
-                    
-                    <input type="submit" value="Cadastrar" class="btn btn-primary" id="btn_cadastro" onclick="cadastro();"/>
-                                     
+                    <p>
+                        <label for="dataAv">Data de Avaliação</label>
+                        <input type="date" id="dataAv" name="dataAv" required />
+                    </p>
 
-                    <button onclick="editar()">Editar</button>
+                    <input type="submit" onclick="cadastro();" value="Cadastro" />
 
-                    <button onclick="excluir()">Excluir</button>
+                    <button id="btA" onclick="editar()">Editar</button>
 
-                    
+                    <button id="btE" onclick="excluir()">Excluir</button>
+
+
+                    <table>
+                        <thread>
+                            <tr>
+                                <th>Matricula</th>
+                                <th>Nome</th>
+                                <th>Cargo</th>
+                                <th>Email</th>
+                                <th>Data de Início</th>
+                                <th>1º Avaliação</th>
+                                <th>2º Avaliação</th>
+                                <th>3º Avaliação</th>
+                            </tr>
+                        </thread>
+                    </table>
 
 
             </form>
